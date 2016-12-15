@@ -1,18 +1,30 @@
+body{
+	background-color: #4d0000;
+}
+
+top{
+	height: 100px;
+	font-size: 48px;
+	color: white;
+	margin-bottom: 50px;
+	text-align: center;
+}
+
 img{
 	max-width: 100%;
 }
 
 .mg-tile{
 	height: 300px;
-	min-width: 200px;
-	border: 2px solid black;
+	min-width: 175px;
+	/* border: 2px solid black; */
 	perspective:  500px /*set up the parent as a 3D playgorund with perspective!*/;
 
 	}
 
 .mg-tile-inner{
 
-	width:  200px;
+	width:  175px;
 	position: relative;
 	transform-style: preserve-3d;   /*must have this otherwise css will preserve the inherent 2d*/
 	transition: all 1s;
@@ -23,7 +35,7 @@ img{
 	position: absolute;
 	top: 0;
 	left: 0;
-	border:  2px solid red;
+/* 	border:  2px solid red; */
 	backface-visibility: hidden;
 	perspective-origin: center center;
 }
@@ -34,11 +46,41 @@ img{
 
 .mg-back{
 	background: url("../blackjack/cards/deck.png") no-repeat 50% 50%;
-	width:  200px;
+	width:  175px;
 	height: 300px; 
 }
 
-.flip{
-	transform: rotateY(-180deg);
-	perspective-origin: center center;
+.flip, .matched{
+	transform: rotateY(-180deg);/* 
+	perspective-origin: center center; */
+	box-shadow: 10px 10px 50px black;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

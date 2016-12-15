@@ -1,30 +1,62 @@
-var cards = [
-	'<img src="../blackjack/cards/12h.png">',
-	'<img src="../blackjack/cards/13h.png".png">'
-];
+var cards = [];
+for(var i=1; i<=13; i++){
+	cards.push('<img src="../blackjack/cards/'+ i + 'h.png">')
+	cards.push('<img src="../blackjack/cards/'+ i + 'h.png">')
+};
+console.log(cards);
+
 // All code will wait until the DOM is ready!
 $(document).ready(function(){
-	var gridSize = 8;    //to make game bigger, increase gridSize,add images to cards array
-
-	var card = '<img src="../blackjack/cards/12h.png">';
-
+	var gridSize = 16; //to make game bigger, increase gridSize,add images to cards array
+	var gridOfCard = [];
 	var mgHTML = '';
-	for(var i = 0; i < gridSize; i++){
-		if(i < 2){card = cards[0];
-		}else if(i<4){card = cards[1];
-		}else if(i<6){card = cards[0];
-		}else{card = cards[1];
-		}
-		mgHTML += '<div class="mg-tile col-sm-3">';
+	gridOfCard = cards.slice(0, gridSize);
+	console.log(gridOfCard);
+
+	var randomizedCards = [];
+	
+	var loopLength = gridOfCard.length;
+	for(var i=0; i < loopLength; i++){
+		var randomIndex = Math.floor(Math.random() * gridOfCard.length);
+		console.log(gridOfCard.length);
+		var card = gridOfCard[randomIndex];
+		randomizedCards.push(card);
+			mgHTML += '<div class="mg-tile col-sm-3">';
 			mgHTML += '<div class="mg-tile-inner">';
-				mgHTML += '<div class="mg-front">'+card+'</div>';
+				mgHTML += '<div class="mg-front">'+ randomizedCards[i] +'</div>';
 				mgHTML += '<div class="mg-back"></div>';
 			mgHTML += '</div>';
 		mgHTML += '</div>';
+		gridOfCard.splice(randomIndex, 1);
 	}
-console.log(mgHTML);
+
     $('.mg-contents').html(mgHTML);
     $('.mg-tile-inner').click(function(){
     	$(this).toggleClass('flip');
+
+    	var cardsUp = $('.flip'); 
+    	if(cardsUp.length == 2){
+    		//check to see if they are the same
+    		var cardsUpImages = cardsUp.find('.mg-front img');
+
+    		if(cardsUpImages[0].src == cardsUpImages[1].src){
+    			//MATCH!!!!
+    			cardsUp.addClass('matched');
+    			console.log("match");
+    			cardsUp.removeClass('flip');
+
+    		}else{
+    			//the user flipped two unmatching cards, flip them back over
+    			setTimeout(function(){
+    				cardsUp.removeClass('flip');
+    			}, 1000);
+    		}
+
+    	}
+
+    	var score = (($('.matched').length)/2);
+    	$('.score').text("Score:" + score + "/8");
+
+
     })
 });
