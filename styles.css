@@ -12,7 +12,7 @@ img{
 
 .mg-tile-inner{
 
-	width:  300px;
+	width:  200px;
 	position: relative;
 	transform-style: preserve-3d;   /*must have this otherwise css will preserve the inherent 2d*/
 	transition: all 1s;
